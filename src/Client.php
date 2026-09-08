@@ -29,8 +29,8 @@ class Client
     }
 
     /**
-     * Low-level call for any public merchant path.
-     * $auth = false for public GET catalogs such as /user/misc/countries.
+     * Call any endpoint from the MoiPayWay API docs.
+     * Pass $auth = false for documented catalog GETs such as /user/misc/countries.
      */
     public function request(string $method, string $path, array $body = [], bool $auth = true): array
     {

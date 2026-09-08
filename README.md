@@ -1,6 +1,8 @@
 # MoiPayWay PHP SDK
 
-Official PHP client for MoiPayWay merchant REST APIs.
+Official PHP SDK for the [MoiPayWay API](https://documenter.getpostman.com/view/11919136/2s93Joz7Bq).
+
+Use this client to call every endpoint in that collection: wallets, collections, transfers, users, verification, cards, catalogs, omnichain, and the rest of the documented surface.
 
 ```bash
 composer require moipayway/php
@@ -31,13 +33,24 @@ $order = $mpw->initiateCollection([
 ]);
 ```
 
-Any documented path:
+## API docs
+
+Paths, methods, and request bodies are in the public collection:
+
+[MoiPayWay API (Postman)](https://documenter.getpostman.com/view/11919136/2s93Joz7Bq)
+
+Call any of those endpoints with `request()`:
 
 ```php
 $mpw->request('POST', 'wallet/details', ['wallet_id' => '...']);
+$mpw->request('GET', 'user/misc/countries', [], false);
 ```
 
-Webhook verification:
+- `test` → `https://dev.moipayway.co`
+- `live` → `https://api.moipayway.co`
+- Auth: `Authorization: Bearer <api_key>` (pass `auth: false` for documented catalog GETs)
+
+## Webhooks
 
 ```php
 $ok = Client::verifyWebhook(
@@ -47,7 +60,3 @@ $ok = Client::verifyWebhook(
     getenv('MOIPAYWAY_API_KEY')
 );
 ```
-
-Environment: `test` → `https://dev.moipayway.co`, `live` → `https://api.moipayway.co`.
-
-Do not put API keys in source control. This package does not wrap cron, system, partner, or share-link internals.

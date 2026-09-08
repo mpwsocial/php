@@ -1,6 +1,6 @@
 {
   "name": "moipayway/php",
-  "description": "Official MoiPayWay PHP SDK for merchant REST APIs.",
+  "description": "Official PHP SDK for the MoiPayWay API.",
   "type": "library",
   "license": "MIT",
   "keywords": ["moipayway", "payments", "wallets", "africa", "sdk"],

@@ -1,7 +1,7 @@
 # MoiPayWay PHP SDK
 
 ```bash
-composer require moipayway/php
+composer require mpwsocial/php
 ```
 
 ```php

@@ -1,9 +1,9 @@
 {
-  "name": "moipayway/php",
+  "name": "mpwsocial/php",
   "description": "Official PHP SDK for the MoiPayWay API.",
   "type": "library",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": ["moipayway", "payments", "wallets", "africa", "sdk"],
   "homepage": "https://github.com/mpwsocial/php",
   "require": {

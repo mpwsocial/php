@@ -13,6 +13,7 @@ class Client
     public Misc $misc;
     public Omnichain $omnichain;
     public Simulation $simulation;
+    public System $system;
     public User $user;
     public Verification $verification;
     public Wallet $wallet;
@@ -35,6 +36,7 @@ class Client
         $this->misc = new Misc($this);
         $this->omnichain = new Omnichain($this);
         $this->simulation = new Simulation($this);
+        $this->system = new System($this);
         $this->user = new User($this);
         $this->verification = new Verification($this);
         $this->wallet = new Wallet($this);

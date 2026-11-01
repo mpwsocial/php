@@ -10,7 +10,6 @@ class Account
     {
         $this->merchant = new AccountMerchant($client);
     }
-
 }
 
 class AccountMerchant
@@ -292,7 +291,6 @@ class Omnichain
         $this->tokenization = new OmnichainTokenization($client);
         $this->wallet = new OmnichainWallet($client);
     }
-
 }
 
 class OmnichainStorage
@@ -317,16 +315,21 @@ class OmnichainTokenization
     public OmnichainTokenizationErc1155 $erc1155;
     public OmnichainTokenizationErc20 $erc20;
     public OmnichainTokenizationErc721 $erc721;
+    public OmnichainTokenizationPlatform $platform;
     public OmnichainTokenizationSep41 $sep41;
+    public OmnichainTokenizationStandards $standards;
+    public OmnichainTokenizationSystem $system;
 
     public function __construct(private Client $client)
     {
         $this->erc1155 = new OmnichainTokenizationErc1155($client);
         $this->erc20 = new OmnichainTokenizationErc20($client);
         $this->erc721 = new OmnichainTokenizationErc721($client);
+        $this->platform = new OmnichainTokenizationPlatform($client);
         $this->sep41 = new OmnichainTokenizationSep41($client);
+        $this->standards = new OmnichainTokenizationStandards($client);
+        $this->system = new OmnichainTokenizationSystem($client);
     }
-
 }
 
 class OmnichainTokenizationErc1155
@@ -337,32 +340,37 @@ class OmnichainTokenizationErc1155
 
     public function balance(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc1155/balance', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/balance', $body, true);
     }
 
     public function burn(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc1155/burn', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/burn', $body, true);
     }
 
     public function deploy(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc1155/deploy', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/deploy', $body, true);
+    }
+
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/info', $body, true);
     }
 
     public function mint(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc1155/mint', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/mint', $body, true);
     }
 
     public function transactions(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc1155/transactions', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/transactions', $body, true);
     }
 
     public function transfer(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc1155/transfer', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/transfer', $body, true);
     }
 }
 
@@ -372,39 +380,79 @@ class OmnichainTokenizationErc20
     {
     }
 
+    public function allowance(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/allowance', $body, true);
+    }
+
+    public function approve(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/approve', $body, true);
+    }
+
     public function balance(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc20/balance', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/balance', $body, true);
     }
 
     public function burn(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc20/burn', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/burn', $body, true);
     }
 
     public function chains(array $body = []): array
     {
-        return $this->client->request('GET', 'omnichain/tokenization/erc20/chains', $body, true);
+        return $this->client->request('GET', 'omnichain/tokenization/standards/erc20/chains', $body, true);
     }
 
     public function deploy(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc20/deploy', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/deploy', $body, true);
+    }
+
+    public function freezeStatus(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/freeze-status', $body, true);
+    }
+
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/info', $body, true);
+    }
+
+    public function lock(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/lock', $body, true);
     }
 
     public function mint(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc20/mint', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/mint', $body, true);
+    }
+
+    public function pause(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/pause', $body, true);
     }
 
     public function transactions(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc20/transactions', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/transactions', $body, true);
     }
 
     public function transfer(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc20/transfer', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/transfer', $body, true);
+    }
+
+    public function unlock(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/unlock', $body, true);
+    }
+
+    public function unpause(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/unpause', $body, true);
     }
 }
 
@@ -416,32 +464,193 @@ class OmnichainTokenizationErc721
 
     public function balance(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc721/balance', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/balance', $body, true);
     }
 
     public function burn(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc721/burn', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/burn', $body, true);
     }
 
     public function deploy(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc721/deploy', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/deploy', $body, true);
+    }
+
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/info', $body, true);
     }
 
     public function mint(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc721/mint', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/mint', $body, true);
+    }
+
+    public function ownerOf(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/owner-of', $body, true);
+    }
+
+    public function tokenUri(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/token-uri', $body, true);
     }
 
     public function transactions(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc721/transactions', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/transactions', $body, true);
     }
 
     public function transfer(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/erc721/transfer', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/transfer', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatform
+{
+    public OmnichainTokenizationPlatformAsset $asset;
+    public OmnichainTokenizationPlatformAudit $audit;
+    public OmnichainTokenizationPlatformDvp $dvp;
+    public OmnichainTokenizationPlatformEvents $events;
+    public OmnichainTokenizationPlatformFx $fx;
+    public OmnichainTokenizationPlatformOps $ops;
+    public OmnichainTokenizationPlatformReconciliation $reconciliation;
+
+    public function __construct(private Client $client)
+    {
+        $this->asset = new OmnichainTokenizationPlatformAsset($client);
+        $this->audit = new OmnichainTokenizationPlatformAudit($client);
+        $this->dvp = new OmnichainTokenizationPlatformDvp($client);
+        $this->events = new OmnichainTokenizationPlatformEvents($client);
+        $this->fx = new OmnichainTokenizationPlatformFx($client);
+        $this->ops = new OmnichainTokenizationPlatformOps($client);
+        $this->reconciliation = new OmnichainTokenizationPlatformReconciliation($client);
+    }
+}
+
+class OmnichainTokenizationPlatformAsset
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function details(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/asset/details', $body, true);
+    }
+
+    public function register(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/asset/register', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatformAudit
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function export(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/audit/export', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatformDvp
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function cancel(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/dvp/cancel', $body, true);
+    }
+
+    public function create(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/dvp/create', $body, true);
+    }
+
+    public function execute(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/dvp/execute', $body, true);
+    }
+
+    public function fund(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/dvp/fund', $body, true);
+    }
+
+    public function list_(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/dvp/list', $body, true);
+    }
+
+    public function status(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/dvp/status', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatformEvents
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function list_(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/events/list', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatformFx
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function execute(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/fx/execute', $body, true);
+    }
+
+    public function quote(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/fx/quote', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatformOps
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function deadLetters(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/ops/dead-letters', $body, true);
+    }
+
+    public function replay(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/ops/replay', $body, true);
+    }
+}
+
+class OmnichainTokenizationPlatformReconciliation
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function run(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/platform/reconciliation/run', $body, true);
     }
 }
 
@@ -453,46 +662,308 @@ class OmnichainTokenizationSep41
 
     public function balance(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/sep41/balance', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/balance', $body, true);
     }
 
     public function burn(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/sep41/burn', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/burn', $body, true);
+    }
+
+    public function chains(array $body = []): array
+    {
+        return $this->client->request('GET', 'omnichain/tokenization/standards/sep41/chains', $body, true);
     }
 
     public function deploy(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/sep41/deploy', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/deploy', $body, true);
     }
 
     public function mint(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/sep41/mint', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/mint', $body, true);
     }
 
     public function transactions(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/sep41/transactions', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/transactions', $body, true);
     }
 
     public function transfer(array $body = []): array
     {
-        return $this->client->request('POST', 'omnichain/tokenization/sep41/transfer', $body, true);
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/transfer', $body, true);
+    }
+}
+
+class OmnichainTokenizationStandards
+{
+    public OmnichainTokenizationStandardsErc1155 $erc1155;
+    public OmnichainTokenizationStandardsErc20 $erc20;
+    public OmnichainTokenizationStandardsErc721 $erc721;
+    public OmnichainTokenizationStandardsSep41 $sep41;
+
+    public function __construct(private Client $client)
+    {
+        $this->erc1155 = new OmnichainTokenizationStandardsErc1155($client);
+        $this->erc20 = new OmnichainTokenizationStandardsErc20($client);
+        $this->erc721 = new OmnichainTokenizationStandardsErc721($client);
+        $this->sep41 = new OmnichainTokenizationStandardsSep41($client);
+    }
+}
+
+class OmnichainTokenizationStandardsErc1155
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function balance(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/balance', $body, true);
+    }
+
+    public function burn(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/burn', $body, true);
+    }
+
+    public function deploy(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/deploy', $body, true);
+    }
+
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/info', $body, true);
+    }
+
+    public function mint(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/mint', $body, true);
+    }
+
+    public function transactions(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/transactions', $body, true);
+    }
+
+    public function transfer(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc1155/transfer', $body, true);
+    }
+}
+
+class OmnichainTokenizationStandardsErc20
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function allowance(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/allowance', $body, true);
+    }
+
+    public function approve(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/approve', $body, true);
+    }
+
+    public function balance(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/balance', $body, true);
+    }
+
+    public function burn(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/burn', $body, true);
+    }
+
+    public function chains(array $body = []): array
+    {
+        return $this->client->request('GET', 'omnichain/tokenization/standards/erc20/chains', $body, true);
+    }
+
+    public function deploy(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/deploy', $body, true);
+    }
+
+    public function freezeStatus(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/freeze-status', $body, true);
+    }
+
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/info', $body, true);
+    }
+
+    public function lock(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/lock', $body, true);
+    }
+
+    public function mint(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/mint', $body, true);
+    }
+
+    public function pause(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/pause', $body, true);
+    }
+
+    public function transactions(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/transactions', $body, true);
+    }
+
+    public function transfer(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/transfer', $body, true);
+    }
+
+    public function unlock(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/unlock', $body, true);
+    }
+
+    public function unpause(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc20/unpause', $body, true);
+    }
+}
+
+class OmnichainTokenizationStandardsErc721
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function balance(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/balance', $body, true);
+    }
+
+    public function burn(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/burn', $body, true);
+    }
+
+    public function deploy(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/deploy', $body, true);
+    }
+
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/info', $body, true);
+    }
+
+    public function mint(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/mint', $body, true);
+    }
+
+    public function ownerOf(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/owner-of', $body, true);
+    }
+
+    public function tokenUri(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/token-uri', $body, true);
+    }
+
+    public function transactions(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/transactions', $body, true);
+    }
+
+    public function transfer(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/erc721/transfer', $body, true);
+    }
+}
+
+class OmnichainTokenizationStandardsSep41
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function balance(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/balance', $body, true);
+    }
+
+    public function burn(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/burn', $body, true);
+    }
+
+    public function chains(array $body = []): array
+    {
+        return $this->client->request('GET', 'omnichain/tokenization/standards/sep41/chains', $body, true);
+    }
+
+    public function deploy(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/deploy', $body, true);
+    }
+
+    public function mint(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/mint', $body, true);
+    }
+
+    public function transactions(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/transactions', $body, true);
+    }
+
+    public function transfer(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/standards/sep41/transfer', $body, true);
+    }
+}
+
+class OmnichainTokenizationSystem
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function capabilities(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/system/capabilities', $body, true);
+    }
+
+    public function status(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/system/status', $body, true);
+    }
+
+    public function transactions(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/tokenization/system/transactions', $body, true);
     }
 }
 
 class OmnichainWallet
 {
     public OmnichainWalletEvm $evm;
+    public OmnichainWalletPolicy $policy;
     public OmnichainWalletStellar $stellar;
 
     public function __construct(private Client $client)
     {
         $this->evm = new OmnichainWalletEvm($client);
+        $this->policy = new OmnichainWalletPolicy($client);
         $this->stellar = new OmnichainWalletStellar($client);
     }
-
 }
 
 class OmnichainWalletEvm
@@ -503,7 +974,6 @@ class OmnichainWalletEvm
     {
         $this->eoa = new OmnichainWalletEvmEoa($client);
     }
-
 }
 
 class OmnichainWalletEvmEoa
@@ -587,6 +1057,33 @@ class OmnichainWalletEvmEoaTransfer
     }
 }
 
+class OmnichainWalletPolicy
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function approvals(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/wallet/policy/approvals', $body, true);
+    }
+
+    public function approve(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/wallet/policy/approve', $body, true);
+    }
+
+    public function create(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/wallet/policy/create', $body, true);
+    }
+
+    public function evaluate(array $body = []): array
+    {
+        return $this->client->request('POST', 'omnichain/wallet/policy/evaluate', $body, true);
+    }
+}
+
 class OmnichainWalletStellar
 {
     public OmnichainWalletStellarEoa $eoa;
@@ -595,7 +1092,6 @@ class OmnichainWalletStellar
     {
         $this->eoa = new OmnichainWalletStellarEoa($client);
     }
-
 }
 
 class OmnichainWalletStellarEoa
@@ -683,7 +1179,6 @@ class Simulation
         $this->directDebit = new SimulationDirectDebit($client);
         $this->transfer = new SimulationTransfer($client);
     }
-
 }
 
 class SimulationCard
@@ -744,6 +1239,53 @@ class SimulationTransfer
     }
 }
 
+class System
+{
+    public SystemMerchant $merchant;
+
+    public function __construct(private Client $client)
+    {
+        $this->merchant = new SystemMerchant($client);
+    }
+}
+
+class SystemMerchant
+{
+    public SystemMerchantProductSetting $productSetting;
+
+    public function __construct(private Client $client)
+    {
+        $this->productSetting = new SystemMerchantProductSetting($client);
+    }
+}
+
+class SystemMerchantProductSetting
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function add(array $body = []): array
+    {
+        return $this->client->request('POST', 'system/merchant/product-setting/add', $body, true);
+    }
+
+    public function delete(array $body = []): array
+    {
+        return $this->client->request('POST', 'system/merchant/product-setting/delete', $body, true);
+    }
+
+    public function update(array $body = []): array
+    {
+        return $this->client->request('POST', 'system/merchant/product-setting/update', $body, true);
+    }
+
+    public function view(array $body = []): array
+    {
+        return $this->client->request('POST', 'system/merchant/product-setting/view', $body, true);
+    }
+}
+
 class User
 {
     public UserAccount $account;
@@ -758,7 +1300,6 @@ class User
         $this->subscription = new UserSubscription($client);
         $this->verification = new UserVerification($client);
     }
-
 }
 
 class UserAccount
@@ -771,7 +1312,6 @@ class UserAccount
         $this->business = new UserAccountBusiness($client);
         $this->individual = new UserAccountIndividual($client);
     }
-
 }
 
 class UserAccountBusiness
@@ -925,6 +1465,11 @@ class Verification
     {
     }
 
+    public function info(array $body = []): array
+    {
+        return $this->client->request('POST', 'verification/info', $body, true);
+    }
+
     public function lookup(array $body = []): array
     {
         return $this->client->request('POST', 'verification/lookup', $body, true);
@@ -971,17 +1516,73 @@ class Wallet
 
 class WalletChannel
 {
+    public WalletChannelBankAccount $bankAccount;
     public WalletChannelTransferRecipient $transferRecipient;
-    public WalletChannelVirtualAccount $virtualAccount;
     public WalletChannelWalletAddress $walletAddress;
 
     public function __construct(private Client $client)
     {
+        $this->bankAccount = new WalletChannelBankAccount($client);
         $this->transferRecipient = new WalletChannelTransferRecipient($client);
-        $this->virtualAccount = new WalletChannelVirtualAccount($client);
         $this->walletAddress = new WalletChannelWalletAddress($client);
     }
+}
 
+class WalletChannelBankAccount
+{
+    public WalletChannelBankAccountComplianceRequest $complianceRequest;
+
+    public function __construct(private Client $client)
+    {
+        $this->complianceRequest = new WalletChannelBankAccountComplianceRequest($client);
+    }
+
+    public function details(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/details', $body, true);
+    }
+
+    public function generate(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/generate', $body, true);
+    }
+
+    public function resubscribe(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/resubscribe', $body, true);
+    }
+
+    public function supportedCurrencies(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/supported-currencies', $body, true);
+    }
+
+    public function supportedInstitutions(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/supported-institutions', $body, true);
+    }
+}
+
+class WalletChannelBankAccountComplianceRequest
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function list_(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/compliance-request/list', $body, true);
+    }
+
+    public function refresh(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/compliance-request/refresh', $body, true);
+    }
+
+    public function respond(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/channel/bank-account/compliance-request/respond', $body, true);
+    }
 }
 
 class WalletChannelTransferRecipient
@@ -996,7 +1597,6 @@ class WalletChannelTransferRecipient
         $this->mobileMoney = new WalletChannelTransferRecipientMobileMoney($client);
         $this->walletAddress = new WalletChannelTransferRecipientWalletAddress($client);
     }
-
 }
 
 class WalletChannelTransferRecipientBank
@@ -1102,38 +1702,6 @@ class WalletChannelTransferRecipientWalletAddress
     public function details(array $body = []): array
     {
         return $this->client->request('POST', 'wallet/channel/transfer-recipient/wallet-address/details', $body, true);
-    }
-}
-
-class WalletChannelVirtualAccount
-{
-    public function __construct(private Client $client)
-    {
-    }
-
-    public function details(array $body = []): array
-    {
-        return $this->client->request('POST', 'wallet/channel/virtual-account/details', $body, true);
-    }
-
-    public function generate(array $body = []): array
-    {
-        return $this->client->request('POST', 'wallet/channel/virtual-account/generate', $body, true);
-    }
-
-    public function resubscribe(array $body = []): array
-    {
-        return $this->client->request('POST', 'wallet/channel/virtual-account/resubscribe', $body, true);
-    }
-
-    public function supportedCurrencies(array $body = []): array
-    {
-        return $this->client->request('POST', 'wallet/channel/virtual-account/supported-currencies', $body, true);
-    }
-
-    public function supportedInstitutions(array $body = []): array
-    {
-        return $this->client->request('POST', 'wallet/channel/virtual-account/supported-institutions', $body, true);
     }
 }
 
@@ -1280,18 +1848,18 @@ class WalletExchange
         $this->fiattocrypto = new WalletExchangeFiattocrypto($client);
         $this->fiattofiat = new WalletExchangeFiattofiat($client);
     }
-
 }
 
 class WalletExchangeCryptotocrypto
 {
     public WalletExchangeCryptotocryptoExternal $external;
+    public WalletExchangeCryptotocryptoWallet $wallet;
 
     public function __construct(private Client $client)
     {
         $this->external = new WalletExchangeCryptotocryptoExternal($client);
+        $this->wallet = new WalletExchangeCryptotocryptoWallet($client);
     }
-
 }
 
 class WalletExchangeCryptotocryptoExternal
@@ -1304,7 +1872,6 @@ class WalletExchangeCryptotocryptoExternal
         $this->bridge = new WalletExchangeCryptotocryptoExternalBridge($client);
         $this->swap = new WalletExchangeCryptotocryptoExternalSwap($client);
     }
-
 }
 
 class WalletExchangeCryptotocryptoExternalBridge
@@ -1315,7 +1882,6 @@ class WalletExchangeCryptotocryptoExternalBridge
     {
         $this->usdc = new WalletExchangeCryptotocryptoExternalBridgeUsdc($client);
     }
-
 }
 
 class WalletExchangeCryptotocryptoExternalBridgeUsdc
@@ -1372,6 +1938,28 @@ class WalletExchangeCryptotocryptoExternalSwap
     }
 }
 
+class WalletExchangeCryptotocryptoWallet
+{
+    public function __construct(private Client $client)
+    {
+    }
+
+    public function fees(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/exchange/cryptotocrypto/wallet/fees', $body, true);
+    }
+
+    public function initiate(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/exchange/cryptotocrypto/wallet/initiate', $body, true);
+    }
+
+    public function supportedPairs(array $body = []): array
+    {
+        return $this->client->request('POST', 'wallet/exchange/cryptotocrypto/wallet/supported-pairs', $body, true);
+    }
+}
+
 class WalletExchangeCryptotofiat
 {
     public WalletExchangeCryptotofiatExternal $external;
@@ -1380,7 +1968,6 @@ class WalletExchangeCryptotofiat
     {
         $this->external = new WalletExchangeCryptotofiatExternal($client);
     }
-
 }
 
 class WalletExchangeCryptotofiatExternal
@@ -1413,7 +2000,6 @@ class WalletExchangeFiattocrypto
     {
         $this->wallet = new WalletExchangeFiattocryptoWallet($client);
     }
-
 }
 
 class WalletExchangeFiattocryptoWallet
@@ -1446,7 +2032,6 @@ class WalletExchangeFiattofiat
     {
         $this->wallet = new WalletExchangeFiattofiatWallet($client);
     }
-
 }
 
 class WalletExchangeFiattofiatWallet
@@ -1503,7 +2088,6 @@ class WalletTransfer
         $this->cross = new WalletTransferCross($client);
         $this->direct = new WalletTransferDirect($client);
     }
-
 }
 
 class WalletTransferCross
